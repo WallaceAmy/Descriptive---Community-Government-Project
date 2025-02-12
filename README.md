@@ -12,7 +12,7 @@ Uncover patterns, identify key influencing factors, and generate insights that c
 ### 🧠Determine Correlations & Variable Relationships
 - Analyse demographic, geographic, and behavioral factors affecting infrastructure utilisation.
 - Identify key variables influencing community engagement and satisfaction.<br>
-### 🔄Predict Infrastructure Demand & Service Utilization
+### 🔄Predict Infrastructure Demand & Service Utilisation
 - Use regression models and probabilistic analysis to predict demand for public infrastructure (parks, public transport, libraries, community centers).<br>
 ### 🌍Assess Regional Disparities
 - Compare geographical clusters to determine which communities experience inequitable access to resources.<br>
@@ -35,7 +35,7 @@ Descriptive Statistics:
 - Measures of position (percentiles, quartiles, z-scores)<br>
 Regression Analysis:
 - Linear Regression for predicting infrastructure demand
-- Logistic Regression for analyzing categorical outcomes (e.g., public transport use: Yes/No)<br>
+- Logistic Regression for analysing categorical outcomes (e.g., public transport use: Yes/No)<br>
 Correlation & Probability Models:
 - Pearson & Spearman Correlation Coefficients
 - Bayesian Inference for predictive probabilities<br>

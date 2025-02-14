@@ -24,23 +24,12 @@ Uncover patterns, identify key influencing factors, and generate insights that c
  <details><summary>Hypotheses:</summary><br>
 - Communities with higher income levels have higher infrastructure utilisation rates.<br>
 - Proximity to public transportation correlates with increased employment rates and well-being scores.<br>
-- Areas with more community events report higher civic engagement and trust in government.<br>
 - Underfunded regions experience lower satisfaction with government services.<br><br>
-</details>
+</details><br>
 
-<details><summary>Statistical Methods:</summary>summary>
-Descriptive Statistics:
-- Measures of central tendency (mean, median, mode)
-- Measures of dispersion (variance, standard deviation, range, IQR)
-- Measures of position (percentiles, quartiles, z-scores)<br>
-Regression Analysis:
-- Linear Regression for predicting infrastructure demand
-- Logistic Regression for analysing categorical outcomes (e.g., public transport use: Yes/No)<br>
-Correlation & Probability Models:
-- Pearson & Spearman Correlation Coefficients
-- Bayesian Inference for predictive probabilities<br>
-Geospatial & Demographic Analysis:
-- K-Means Clustering for identifying regional disparities
-- Heatmaps for resource allocation
+## 📊 Visualisations:
+ <details><summary>Power BI Dashboard</summary><br>
+
+![Dashboard](https://github.com/WallaceAmy/Descriptive---Community-Government-Project/blob/main/Descriptive%20-%20Community%20Government%20Project.png)
 </details>
 

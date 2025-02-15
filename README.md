@@ -1,31 +1,22 @@
 ## 🏢 Community Well-being & Infrastructure Utilisation Analysis<br>
 ## 📊 Project Overview:
-The community government seeks to understand how different factors influence public well-being and the utilisation of local infrastructure. 
-This project will apply descriptive analytics to analyse various datasets related to demographics, infrastructure access, well-being indicators, and community engagement.
-Uncover patterns, identify key influencing factors, and generate insights that can inform policy decisions, resource allocation, and infrastructure improvements.<br><br>
+- Analysed public well-being & infrastructure usage using descriptive analytics.
+- Explored income levels, service access, civic engagement, and funding disparities.
+- Developed visual models to optimise government policy decisions.<br><br>
 
-## 🎯 Key Objectives:
-<details><summary>Show Key Objectives</summary><br>
+## 🛠️ Tools & Technologies:
+- Programming: Python (Pandas, NumPy), Power Query M
+- Data Visualisation: Power BI
+- Analysis Techniques: Central Tendancies, Dispersion, Clustering, Sentiment Analysis, Correlation<br>
 
-### 🔢Identify Key Community Well-being Indicators
-- Measure central tendency, dispersion, and positional metrics for key variables such as household income, health outcomes, and infrastructure usage.<br>
-### 🧠Determine Correlations & Variable Relationships
-- Analyse demographic, geographic, and behavioral factors affecting infrastructure utilisation.
-- Identify key variables influencing community engagement and satisfaction.<br>
-### 🔄Predict Infrastructure Demand & Service Utilisation
-- Use regression models and probabilistic analysis to predict demand for public infrastructure (parks, public transport, libraries, community centers).<br>
-### 🌍Assess Regional Disparities
-- Compare geographical clusters to determine which communities experience inequitable access to resources.<br>
-### 💡Generate Actionable Insights for Policy Recommendations
-- Provide evidence-backed suggestions for policy improvements, funding allocation, and strategic development.<br><br>
-</details><br>
 
-## 🧪 Hypothesis Design & Testing Approach:
- <details><summary>Hypotheses:</summary><br>
-- Communities with higher income levels have higher infrastructure utilisation rates.<br>
-- Proximity to public transportation correlates with increased employment rates and well-being scores.<br>
-- Underfunded regions experience lower satisfaction with government services.<br><br>
-</details><br>
+## 🎯 Key Insights:
+✅ Household Income in the middle quartile income bracket correlates with increased infrastructure use.
+✅ Household Income in the lower quartile income bracket correlates with decreased infrastructure use.
+✅ Proximity to services boosts employment & well-being scores.
+✅ People who rate Accessibility to Service as low correlates to a low usage in services.
+✅ There is decrease in Government Funding when the Proximity of Services are further away.
+✅ Underfunded regions report lower happiness.<br><br>
 
 ## 📊 Visualisations:
  <details><summary>Power BI Dashboard</summary><br>

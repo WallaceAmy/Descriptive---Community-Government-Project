@@ -24,3 +24,9 @@
 ![Dashboard](https://github.com/WallaceAmy/Descriptive---Community-Government-Project/blob/main/Descriptive%20-%20Community%20Government%20Project.png)
 </details>
 
+## 💡 Recommendations:
+- Consider investing in services located in more remote areas or those with low accessibility rates to enhance usage frequency.
+- Allocate resources to investigate why individuals in lower income brackets exhibit lower service usage frequency.
+- Explore strategies to develop services in regions with high unemployment rates to boost employment opportunities and overall well-being.
+- Investigate opportunities to ensure equitable distribution of government funding across regions C and D.
+

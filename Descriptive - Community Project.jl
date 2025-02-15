@@ -5,57 +5,107 @@ import pandas as pd
 np.random.seed(42)
 
 # Define dataset sizes
-num_rows = 1_000_000  # 1 million rows per table
+num_rows = 50_000  # 50 thousand rows per table
 
-# Generate Demographics Data
+# Generate Household Income with a higher frequency near the mean
+income_mean = 75000  # Adjusted mean closer to center
+income_std_dev = 30000  # Increased standard deviation for wider spread
+
+# Generate a skewed normal distribution with values clustering around the mean
+income_raw = np.random.normal(0, 1, num_rows)
+income_transformed = income_mean + income_std_dev * income_raw * np.exp(-0.2 * income_raw**2)
+
+# Ensure values naturally reach the desired boundaries before clipping
+income_transformed = np.clip(income_transformed, 30000, 150000)
+
+# Assign bins
+income_bins = [0, 65000, 90000, 100000, np.inf]
+income_labels = ['<=65K', '65K-90K', '90K-100K', '>100K']
+
 demographics = pd.DataFrame({
     "Person_ID": np.arange(1, num_rows + 1),
     "Age": np.random.randint(15, 90, num_rows),
     "Gender": np.random.choice(["Male", "Female", "Non-binary"], num_rows, p=[0.44, 0.46, 0.10]),
-    "Household_Income": np.random.normal(200000, 15000, num_rows).astype(int), 
+    "Household_Income": np.round(income_transformed).astype(int),
+    "Income_Group": pd.cut(income_transformed, bins=income_bins, labels=income_labels),
     "Employment_Status": np.random.choice(["Employed", "Unemployed", "Student", "Retired"], num_rows, p=[0.56, 0.05, 0.24, 0.15]),
     "Education_Level": np.random.choice(["High School", "Bachelor", "Master", "PhD"], num_rows, p=[0.53, 0.33, 0.09, 0.05]),
     "Ethnicity": np.random.choice(["Group A", "Group B", "Group C", "Group D"], num_rows),
     "Region": np.random.choice(["Region A", "Region B", "Region C", "Region D"], num_rows, p=[0.56, 0.05, 0.24, 0.15])
 })
 
-# Generate Infrastructure Utilization Data
-infrastructure_usage = pd.DataFrame({
-    "Person_ID": np.random.choice(demographics["Person_ID"], num_rows),
-    "Facility_Type": np.random.choice(["Library", "Park", "Public Transport", "Community Center"], num_rows, p=[0.52, 0.30, 0.10, 0.08]),
-    "Frequency_of_Use": np.random.randint(0, 30, num_rows),  # Times per month
-    "Accessibility_Rating": np.random.randint(1, 6, num_rows)  # Rating 1-5
-})
+# Adjust Frequency of Use to follow a curved correlation with Household Income
+income_bins_freq = {
+    '<=65K': np.random.randint(5, 15, num_rows),  # Lower usage
+    '65K-90K': np.random.randint(20, 35, num_rows),  # Peak usage
+    '90K-100K': np.random.randint(15, 25, num_rows),  # Moderate usage
+    '>100K': np.random.randint(5, 10, num_rows)  # Lower usage
+}
 
-# Generate Community Well-being Data
-wellbeing = pd.DataFrame({
-    "Person_ID": np.random.choice(demographics["Person_ID"], num_rows),
-    "Happiness_Score": np.random.randint(1, 11, num_rows),  # Scale 1-10
-    "Mental_Health_Index": np.random.randint(0, 100, num_rows),  # Percentage
-    "Civic_Engagement_Score": np.random.randint(1, 6, num_rows)  # Scale 1-5
-})
+demographics["Frequency_of_Use"] = demographics["Income_Group"].apply(lambda x: np.random.randint(*{
+    '<=65K': (5, 15),
+    '65K-90K': (20, 35),
+    '90K-100K': (15, 25),
+    '>100K': (5, 10)
+}[x]))
 
-# Generate Economic & Policy Data
+# Generate Government Funding Data
+region_funding = {
+    "Region A": 220000,
+    "Region B": 180000,
+    "Region C": 90000,
+    "Region D": 50000
+}
+
 economic_policy = pd.DataFrame({
     "Region": np.random.choice(["Region A", "Region B", "Region C", "Region D"], num_rows),
-    "Government_Funding": np.random.normal(500000, 150000, num_rows).astype(int),  # Funding per region
-    "Economic_Growth": np.random.uniform(0.5, 5.0, num_rows),  # Growth rate
-    "Social_Benefits_Distributed": np.random.randint(1000, 50000, num_rows)
+})
+economic_policy["Government_Funding"] = economic_policy["Region"].map(region_funding) + np.random.randint(-5000, 5000, num_rows)
+economic_policy["Economic_Growth"] = np.random.uniform(0.5, 5.0, num_rows)
+economic_policy["Social_Benefits_Distributed"] = np.random.randint(1000, 50000, num_rows)
+
+# Generate Distance to Nearest Service based on Government Funding
+region_distance_factor = {
+    "Region A": 5,
+    "Region B": 15,
+    "Region C": 3,
+    "Region D": 20
+}
+
+demographics["Distance_to_Nearest_Service"] = demographics["Region"].map(region_distance_factor) * np.random.uniform(0.5, 1.5, num_rows)
+
+# Generate Infrastructure Usage Data
+facility_types = ["Park", "Library", "Hospital", "Shopping Center", "Sports Complex"]
+infrastructure_usage = pd.DataFrame({
+    "Person_ID": demographics["Person_ID"],
+    "Facility_Type": np.random.choice(facility_types, num_rows),
 })
 
-# Generate Geographical & Transport Data
-geographical_transport = pd.DataFrame({
-    "Person_ID": np.random.choice(demographics["Person_ID"], num_rows),
-    "Distance_to_Nearest_Service": np.random.uniform(0.1, 50, num_rows),  # Distance in km
-    "Transport_Availability": np.random.choice(["High", "Medium", "Low"], num_rows, p=[0.4, 0.4, 0.2]),
-    "Land_Use_Type": np.random.choice(["Urban", "Suburban", "Rural"], num_rows, p=[0.5, 0.3, 0.2])
-})
+# Adjust Frequency of Use based on Income Group
+infrastructure_usage["Frequency_of_Use"] = infrastructure_usage["Person_ID"].apply(
+    lambda pid: np.random.randint(*{
+        '<=65K': (5, 15),
+        '65K-90K': (20, 35),
+        '90K-100K': (15, 25),
+        '>100K': (5, 10)
+    }[demographics.loc[demographics["Person_ID"] == pid, "Income_Group"].values[0]])
+)
 
-# Save datasets to CSV
-demographics.to_csv("demographics2.csv", index=False)
-infrastructure_usage.to_csv("infrastructure_usage2.csv", index=False)
-wellbeing.to_csv("wellbeing2.csv", index=False)
-economic_policy.to_csv("economic_policy2.csv", index=False)
-geographical_transport.to_csv("geographical_transport2.csv", index=False)
+# Adjust Accessibility Rating based on Facility Type
+facility_accessibility = {
+    "Park": np.random.randint(8, 10, num_rows),  # Higher accessibility
+    "Library": np.random.randint(8, 10, num_rows),  # Higher accessibility
+    "Hospital": np.random.randint(5, 9, num_rows),
+    "Shopping Center": np.random.randint(4, 8, num_rows),
+    "Sports Complex": np.random.randint(3, 7, num_rows)
+}
 
-print("Dataset generation complete. Files saved as CSV.")
+infrastructure_usage["Accessibility_Rating"] = infrastructure_usage["Facility_Type"].map(facility_accessibility)
+
+# Save to Excel format
+with pd.ExcelWriter("output_data.xlsx") as writer:
+    demographics.to_excel(writer, sheet_name="Demographics", index=False)
+    economic_policy.to_excel(writer, sheet_name="Economic Policy", index=False)
+    infrastructure_usage.to_excel(writer, sheet_name="Infrastructure Usage", index=False)
+
+print("Dataset generation complete. Files saved as Excel.")
